@@ -46,7 +46,21 @@ def check_columns(board: list) -> bool:
     return check_lines(columns)
       
 def check_blocks_of_colour(board: list) -> bool:
-    pass
+    """
+    Function check L-shaped coloured boxes according to the rules.
+
+    >>> print(check_blocks_of_colour(read_board('puzzle_doc.txt')))
+    True
+    """
+    coloured_blocks = [[(i, 4) for i in range(5)] + [(4, i) for i in range(5, 9)],
+    [(i, 3) for i in range(1, 6)] + [(5, i) for i in range(4, 8)],
+    [(i, 2) for i in range(2, 7)] + [(6, i) for i in range(3, 7)],
+    [(i, 1) for i in range(3, 8)] + [(7, i) for i in range(2, 6)],
+    [(i, 0) for i in range(4, 9)] + [(8, i) for i in range(1, 5)]]
+
+    check_blocks = [check_lines("".join(board[i][j] for i, j in block))\
+                     for block in coloured_blocks]
+    return all(check_blocks)
 
 if __name__ == "__main__":
     import doctest

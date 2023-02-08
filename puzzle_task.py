@@ -44,24 +44,7 @@ def check_columns(board: list) -> bool:
     """
     columns = [''.join([elem[i] for elem in board]) for i in range(len(board[0]))]
     return check_lines(columns)
-
-#def check_columns(board: list) -> bool:
-#    result =[]
-#    for i in board:
-#        for j in board:
-#            if board.index(i) != board.index(j):
-#                for elem in i:
-#                    for num in j:
-#                        if i.index(elem) == j.index(num) and elem.isdigit() and num.isdigit():
-#                            if int(elem) == int(num):
-#                                result.append('False')
-#                            else:
-#                                result.append('True')
-#    if 'False' in result:
-#        return False
-#    else:
-#        return True
-        
+      
 def check_blocks_of_colour(board: list) -> bool:
     pass
 

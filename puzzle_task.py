@@ -44,7 +44,7 @@ def check_columns(board: list) -> bool:
     """
     columns = [''.join([elem[i] for elem in board]) for i in range(len(board[0]))]
     return check_lines(columns)
-      
+
 def check_blocks_of_colour(board: list) -> bool:
     """
     Function check L-shaped coloured boxes according to the rules.

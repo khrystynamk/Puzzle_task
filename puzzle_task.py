@@ -22,33 +22,45 @@ def read_board(path: str) -> list:
 
 def check_lines(board: list) -> bool:
     """
-    Function check lines of board.
+    Function checks lines of the board.
 
     >>> print(check_lines(read_board('puzzle_doc.txt')))
-    False
+    True
     """
-    list_of_nums = [int(i) for elem in board for i in elem if i.isdigit()]
-    set_of_nums = set(list_of_nums)
-    if list_of_nums == set_of_nums and all(1 <= i <= 9 for i in list_of_nums):
-        return True
-    return False
+    list_of_bools = []
+    for line in board:
+        list_of_nums = [int(i) for i in line if i.isdigit()]
+        set_of_nums = set(list_of_nums)
+        list_of_bools.append(len(list_of_nums) == len(set_of_nums)\
+             and all(1 <= i <= 9 for i in list_of_nums))
+    return all(list_of_bools)
 
 def check_columns(board: list) -> bool:
-    result =[]
-    for i in board:
-        for j in board:
-            if board.index(i) != board.index(j):
-                for elem in i:
-                    for num in j:
-                        if i.index(elem) == j.index(num) and elem.isdigit() and num.isdigit():
-                            if int(elem) == int(num):
-                                result.append('False')
-                            else:
-                                result.append('True')
-    if 'False' in result:
-        return False
-    else:
-        return True
+    """
+    Function checks columns of the board.
+
+    >>> print(check_columns(read_board('puzzle_doc.txt')))
+    False
+    """
+    columns = [''.join([elem[i] for elem in board]) for i in range(len(board[0]))]
+    return check_lines(columns)
+
+#def check_columns(board: list) -> bool:
+#    result =[]
+#    for i in board:
+#        for j in board:
+#            if board.index(i) != board.index(j):
+#                for elem in i:
+#                    for num in j:
+#                        if i.index(elem) == j.index(num) and elem.isdigit() and num.isdigit():
+#                            if int(elem) == int(num):
+#                                result.append('False')
+#                            else:
+#                                result.append('True')
+#    if 'False' in result:
+#        return False
+#    else:
+#        return True
         
 def check_blocks_of_colour(board: list) -> bool:
     pass

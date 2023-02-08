@@ -17,7 +17,7 @@ def read_board(path: str) -> list:
  '* 4 1****', '9 5', '6  83  *', '3   1  **', '8  2***', '2  ****']
     """
     with open(path, 'r', encoding = 'utf-8') as file:
-        content = [line.strip() for line in file.readlines()]
+        content = [line.replace(' ', '.').replace('\n', '') for line in file.readlines()]
     return content
 
 def check_lines(board: list) -> bool:
@@ -34,8 +34,22 @@ def check_lines(board: list) -> bool:
     return False
 
 def check_columns(board: list) -> bool:
-    pass
-
+    result =[]
+    for i in board:
+        for j in board:
+            if board.index(i) != board.index(j):
+                for elem in i:
+                    for num in j:
+                        if i.index(elem) == j.index(num) and elem.isdigit() and num.isdigit():
+                            if int(elem) == int(num):
+                                result.append('False')
+                            else:
+                                result.append('True')
+    if 'False' in result:
+        return False
+    else:
+        return True
+        
 def check_blocks_of_colour(board: list) -> bool:
     pass
 
